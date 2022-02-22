@@ -1,168 +1,102 @@
 'use strict';
 console.log('subway eat fresh');
 
-// global ver. 
-let theContainer = document.getElementById('container');
-let busOne = document.getElementById('busOne');
-let busTwo = document.getElementById('busTwo');
-let busThree = document.getElementById('busThree');
-let resultsButton = document.getElementById('resultsButton');
-let resultsList = document.getElementById('displayResultsList');
-
-
-let voteAllowed = 5;
+// Variables
+// let clicksAllowed = 1;
+let clicksAllowed = 25;
 let allBusses = [];
 
-
-
+// DOM Windows
+let imageContainer = document.getElementById('container');
+let imgOne = document.getElementById('busOne');
+let imgTwo = document.getElementById('busTwo');
+let imgThree = document.getElementById('busThree');
+let resultsButton = document.getElementById('resultsButton');
+let resultsList = document.getElementById('displayResultsList');
+// Constructor
 function Bus(name, fileExtension = 'jpeg'){
-  this.name = name; 
-  this.view = 0;
-  this.clicks = 0;
+  this.name = name;
+  this.numViews = 0;
+  this.numCLicks = 0;
   this.src = `assets/images/${name}.${fileExtension}`;
-
-  
   allBusses.push(this);
 }
-
-// DOM REF
-// let myContainter = document.getElementById('container');
-// let imgOne = document.getElementById('imgOne');
-// let imgTwo = document.getElementById('imgTwo');
-// let imgThree = document.getElementById('imgThree');
-// let imgFour = document.getElementById('imgFour');
-// let imgFive = document.getElementById('imgFive');
-// let imgSix = document.getElementById('imgSix');
-// let imgSeven = document.getElementById('imgSeven');
-// let imgEight = document.getElementById('imgEight');
-// let imgNine = document.getElementById('imgNine');
-// let imgTen = document.getElementById('imgTen');
-// let imgEleven = document.getElementById('imgEleven');
-// let imgTwelve = document.getElementById('imgTwelve');
-// let imgThirteen = document.getElementById('imgThirteen');
-// let imgFourteen = document.getElementById('imgFourteen');
-// let imgFifteen = document.getElementById('imgFifteen');
-// let imgSixteen = document.getElementById('imgSixteen');
-// let imgSeventeen = document.getElementById('imgSeventeen');
-// let imgEighteen = document.getElementById('imgEighteen');
-
-// let resultsButton = document.getElementById('resultsButton');
-// let showResults = document.getElementById('displayResultsList');
-
-
-  
-
-
-new Bus ('bag');
-new Bus ('banana');
-new Bus ('boots');
-new Bus ('breakfast');
-new Bus ('bubblegum');
-new Bus ('chair');
-new Bus ('cthulhu');
-new Bus ('dog-duck');
-new Bus ('dragon');
-new Bus ('pen');
-new Bus ('pet-sweep');
-new Bus ('scissors');
-new Bus ('shark');
-new Bus ('sweep', 'png');
-new Bus ('tauntaun');
-new Bus ('unicorn');
-new Bus ('water-can');
-new Bus ('wine-glass');
-
+new Bus('bag');
+new Bus('banana');
+new Bus('bathroom');
+new Bus('boots');
+new Bus('breakfast');
+new Bus('bubblegum');
+new Bus('chair');
+new Bus('cthulhu');
+new Bus('dog-duck');
+new Bus('dragon');
+new Bus('pen');
+new Bus('pet-sweep');
+new Bus('scissors');
+new Bus('shark');
+new Bus('sweep', 'png');
+new Bus('tauntaun');
+new Bus('unicorn');
+new Bus('water-can');
+new Bus('wine-glass');
 // console.log(allBusses);
-
-function getRandomIndex(){
-  return Math.random(Math.random() * allBusses.length);
+// Other Code
+function randomIndexNum() {
+  return Math.floor(Math.random()*allBusses.length);
 }
-// Executable Code
-// Render img
-
-// DOM manipulation
-
-function renderBus(){
-  let busUnoIndex = getRandomIndex();
-  let busDoseIndex = getRandomIndex();
-  let busTresIndex = getRandomIndex();
-
-  while(busUnoIndex === busDoseIndex || busUnoIndex === busTresIndex || busDoseIndex === busTresIndex) {
-    busDoseIndex = getRandomIndex();
-    busTresIndex = getRandomIndex();
+function renderBusses(){
+  let imagesArray= [];
+  imagesArray[0] = randomIndexNum();
+  imagesArray[1] = randomIndexNum();
+  imagesArray[2] = randomIndexNum();
+  // console.log(imagesArray);
+  while(imagesArray[1] === imagesArray[0]) {
+    imagesArray[1] = randomIndexNum();
   }
- 
-console.log(`Bus votes ${voteAllowed}`);
+  while(imagesArray[2] === imagesArray[1] || imagesArray[2] === imagesArray[0]) {
+    imagesArray[2] = randomIndexNum();
+  }
+  imgOne.src = allBusses[imagesArray[0]].src;
+  imgOne.alt = allBusses[imagesArray[0]].name;
+  allBusses[imagesArray[0]].numViews++;
 
-busOne.src = allBusses[busUnoIndex].src;
-busOne.alt = allBusses[busUnoIndex].name;
-allBusses[busUnoIndex].views++;
-
-busTwo.src = busses[busDoseIndex].src;
-busTwo.alt = busses[busDoseIndex].name;
-allBusses[busDoseIndex].views++;
-
-busThree = busses[busTresIndex].src;
-busThree = busses[busTresIndex.name];
-allBusses[busTresIndex].views++;
-}
-
-// renderBus();
-
-function engageClick(event) {
-  votes--;
-  let busClicked = event.target.alt;
-
-  for (let i = 0; i < allBusses.length; i++) {
-    if (busClicked === allBusses[i].name) {
-      allBusses[i].clicks++;
-    }
-  }  
-  renderBus();
+  imgTwo.src = allBusses[imagesArray[1]].src;
+  imgTwo.alt = allBusses[imagesArray[1]].name;
+  allBusses[imagesArray[1]].numViews++;
   
-  if (votes === 0) {
-    theContainer.removeEventListener('click', engageClick);
+  imgThree.src = allBusses[imagesArray[2]].src;
+  imgThree.alt = allBusses[imagesArray[2]].name;
+  allBusses[imagesArray[2]].numViews++;
+}
+renderBusses();
+function handleClick(event){
+  clicksAllowed--;
+  let bussesClicked = event.target.alt;
+  for (let i = 0; i < allBusses.length; i++){
+    if(bussesClicked === allBusses[i].name){
+      allBusses[i].numCLicks++;
+    }
+  }
+  renderBusses();
+  if (clicksAllowed === 0) {
+    imageContainer.removeEventListener('click', handleClick);
   }
 }
 
-function engageResults() {
-  for (let i = 0; i < allBusses.length; i++) {
-    let li = document.createElement('li');
-    li.textContent = `${allBusses[i].name} was viewd ${allBusses[i].views} times, and the one that looked most bussy was ${allBusses[i].clicks}.`;
-    displayUl.appendChild(li);
+console.log('$5 footlong');
+
+// eslint-disable-next-line no-unused-vars
+function handleResultsButton(event){
+  if (clicksAllowed === 0){
+    for(let i = 0; i < allBusses.length; i++){
+      let li = document.createElement('li');
+      li.textContent = `${allBusses[i].name} viewed: ${allBusses[i].numViews}. Clicked: ${allBusses[i].numCLicks} times.`;
+      resultsList.appendChild(li);
+    }
   }
 }
+console.log('Jared was always weird.');
 
-theContainer.addEventListener('click', engageClick);
-resultsButton.addEventListener('click', engageResults);
-
-
-
-
-
-
-//   busOne
-
-//   imgOne.src = allBusses[0].src;
-//   imgTwo.src = allBusses[1].src;
-//   imgThree.src = allBusses[2].src;
-//   imgFour.src = allBusses[3].src;
-//   imgFive.src = allBusses[4].src;
-//   imgSix.src = allBusses[5].src;
-//   imgSeven.src = allBusses[6].src;
-//   imgEight.src = allBusses[7].src;
-//   imgNine.src = allBusses[8].src;
-//   imgTen.src = allBusses[9].src;
-//   imgEleven.src = allBusses[10].src;
-//   imgTwelve.src = allBusses[11].src;
-//   imgThirteen.src = allBusses[12].src;
-//   imgFourteen.src = allBusses[13].src;
-//   imgFifteen.src = allBusses[14].src;
-//   imgSixteen.src = allBusses[15].src;
-//   imgSeventeen.src = allBusses[16].src;
-//   imgEighteen.src = allBusses[17].src;
-// }
-
-
-// Need to render images
-
+imageContainer.addEventListener('click', handleClick);
+resultsButton.addEventListener('click', handleResultsButton);
