@@ -1,0 +1,42 @@
+body {
+  text-align: center;
+}
+
+#busOne {
+  height: 250px;
+  width: 250px;
+  border: orangered solid 2px;
+}
+
+#busTwo {
+  height: 250px;
+  width: 250px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: orangered solid 2px;
+}
+
+#busThree {
+  height: 250px;
+  width: 250px;
+  border: orangered solid 2px;
+}
+
+#resultsButton {
+  padding-top: 10px;
+  text-align: center;
+}
+
+#button {
+  background-color: orange;
+  padding-block: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#displayResultsList {
+  color: blueviolet;
+  border: cadetblue solid;
+  column-count: 2;
+  margin-top: 10px;
+}

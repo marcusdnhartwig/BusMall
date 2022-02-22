@@ -14,18 +14,25 @@
     </header>
 
     <main>
+      <h1>Please choose the image that most resembles a bus.</h1>
+      
       <section id='container'>
         <img id='busOne' src="" alt="">
         <img id='busTwo' src="" alt="">
         <img id='busThree' src="" alt="">
       </section>
 
-      <div id="resultsButton">Display My Results</div>
-      <ul id='displayResultsList'></ul>
+      <div id="resultsButton"><button id='button'>My Results</button> 
+        <ul id='displayResultsList'></ul>
+      </div>
+
+      <section>
+        <canvas id='mychart'></canvas>
+      </section>
     </main>
 
     <footer></footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <script src="/js/app.js"></script>
 </body>
 </html>
