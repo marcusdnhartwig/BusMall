@@ -1,13 +1,19 @@
 'use strict';
 
+
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, myObj);
+
+function renderChart(){
+
+  let allBusses = [];
+  let bussesClicked = [];
+  let resultsList = [];
   
-  let myObj = {
-  
-  type: 'bar',
+  let chartObject = {
+    type: 'bar',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: [allBusses],
         datasets: [{
             label: '# of Votes',
             data: [12, 19, 3, 5, 2, 3],
@@ -37,5 +43,8 @@ const myChart = new Chart(ctx, myObj);
             }
         }
     }
-};
+  };
+
+}
+  
 
