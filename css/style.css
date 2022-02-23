@@ -1,6 +1,20 @@
+
+header h1 {
+  text-align: center;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  text-decoration: blue underline;
+}
+
+
 body {
   text-align: center;
 }
+
+body h1 {
+  padding-bottom: 10px;
+}
+
 
 #busOne {
   height: 250px;
