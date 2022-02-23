@@ -6,6 +6,17 @@ console.log('subway eat fresh');
 let clicksAllowed = 25;
 let allBusses = [];
 
+/////////// STEP 3 From below ////////
+let retreivedBusses = localStorage.getItem('Bus');
+console.log('retreivedBusses',retreivedBusses);
+
+// ////// Step 4: Parse data for code to read
+ let parsedBusses = JSON.parse(retreivedBusses);
+ console.log('parsed busses', parsedBusses);
+
+///// Step 5: Use the data that came out of localStorage
+
+
 // DOM Windows
 let imageContainer = document.getElementById('container');
 let imgOne = document.getElementById('busOne');
@@ -21,25 +32,36 @@ function Bus(name, fileExtension = 'jpeg'){
   this.src = `assets/images/${name}.${fileExtension}`;
   allBusses.push(this);
 }
-new Bus('bag');
-new Bus('banana');
-new Bus('bathroom');
-new Bus('boots');
-new Bus('breakfast');
-new Bus('bubblegum');
-new Bus('chair');
-new Bus('cthulhu');
-new Bus('dog-duck');
-new Bus('dragon');
-new Bus('pen');
-new Bus('pet-sweep');
-new Bus('scissors');
-new Bus('shark');
-new Bus('sweep', 'png');
-new Bus('tauntaun');
-new Bus('unicorn');
-new Bus('water-can');
-new Bus('wine-glass');
+
+
+///////////// LOCAL STORAGE
+/// Step 5: Use the data that came out of localStorage
+if (retreivedBusses) {
+  allBusses = parsedBusses;
+} else {
+  new Bus('bag');
+  new Bus('banana');
+  new Bus('bathroom');
+  new Bus('boots');
+  new Bus('breakfast');
+  new Bus('bubblegum');
+  new Bus('chair');
+  new Bus('cthulhu');
+  new Bus('dog-duck');
+  new Bus('dragon');
+  new Bus('pen');
+  new Bus('pet-sweep');
+  new Bus('scissors');
+  new Bus('shark');
+  new Bus('sweep', 'png');
+  new Bus('tauntaun');
+  new Bus('unicorn');
+  new Bus('water-can');
+  new Bus('wine-glass');
+  }
+  
+
+
 console.log(allBusses);
 
 
@@ -99,7 +121,19 @@ function handleClick(event){
   renderBusses();
   if (clicksAllowed === 0) {
     imageContainer.removeEventListener('click', handleClick);
-  }
+   
+    /////////// LOCAL STORAGE BEGINS ////////////
+    // step 1: stringify data
+    let stringifyBusses = JSON.stringify(allBusses);
+     console.log('stringified busses', stringifyBusses);
+    
+    // // Step 2: set the item into local storage
+     localStorage.setItem('Bus', stringifyBusses);
+    
+    // Step 3: get item out of local storag THIS IS GLOBAL ^^^^^^^^^
+    // Step 4: Parse data for code to read THIS IS GLOBAL ^^^^^^^^
+
+  }    
 }
 
 console.log('$5 footlong');
